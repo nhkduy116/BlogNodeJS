@@ -9,7 +9,7 @@ class SiteController {
                     courses: multipleMongooseToObject(courses),
                 });
             })
-            .catch(next);
+            .catch((err) => {});
     }
 
     search(req, res) {
