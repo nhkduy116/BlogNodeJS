@@ -27,7 +27,7 @@
                             class='btn btn-link'
                             data-toggle='modal'
                             data-target='#delete-course-modal'
-                            data-id={{course.id}}
+                            data-id={{this._id}}
                         >Delete</a>
                     </td>
                 </tr>
@@ -42,8 +42,6 @@
     id='delete-course-modal'
     tabindex='-1'
     role='dialog'
-    aria-labelledby='exampleModalLabel'
-    aria-hidden='true'
 >
     <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -81,11 +79,18 @@
 <form name='delete-course-form' method='POST'></form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() { var courseId; var
-    deleteCourseForm = document.forms['delete-course-form'];
-    $('#exampleModal').on('show.bs.modal', function (event) { var button =
-    $(event.relatedTarget) button.data('id') }); var btnDeleteCourse =
-    document.getElementById('btn-delete-course'); btnDeleteCourse.onclick =
-    function() { deleteCourseForm.action = '/courses/' + courseId +
-    '?_method=DELETE' deleteCourseForm.submit() }; });
+    document.addEventListener('DOMContentLoaded', function() { 
+        var courseId; 
+        var deleteCourseForm = document.forms['delete-course-form'];
+        var btnDeleteCourse = document.getElementById('btn-delete-course');
+        $('#delete-course-modal').on('show.bs.modal', function (event) { 
+            var button = $(event.relatedTarget) ;
+            courseId = button.data('id');
+            console.log(courseId);
+        });
+        btnDeleteCourse.onclick = function() { 
+            deleteCourseForm.action = '/courses/' + courseId + '?_method=DELETE';
+            deleteCourseForm.submit();
+        }; 
+    });
 </script>
